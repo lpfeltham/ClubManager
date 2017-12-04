@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,8 +31,6 @@ public class ClubPageGUI extends JFrame {
 		u1 = user;
 		c1 = club;
 		
-		//this.setLayout(new FlowLayout(FlowLayout.CENTER));
-		//this.setLayout(new FlowLayout(FlowLayout.TRAILING));
 		this.setLayout(new BorderLayout());
 		setVisible(true);
 		
@@ -48,14 +48,24 @@ public class ClubPageGUI extends JFrame {
 	}
 
 	private void buildMemberGUI(Club club) {
-		JLabel placedLabel = new JLabel(club.getName());
+		JLabel placedLabel = new JLabel("  " + club.getName());
+		JLabel placedDescription = new JLabel("  " + club.getDescription());
         JButton leave = new JButton("Leave Club");
-        JPanel panel = new JPanel();
-        
+        //JPanel panel = new JPanel();
    
-        leave.setBackground(Color.RED);;
-       
+        leave.setBackground(Color.RED);
+        
+        this.add(placedLabel, BorderLayout.NORTH);
+        this.add(placedDescription);
+        
         this.add(leave, BorderLayout.SOUTH);
+        
+		// sign up action event listener
+		leave.addActionListener(new ActionListener() {	
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 	}
 	
 	private void buildOfficerGUI(Club club) {
@@ -68,7 +78,6 @@ public class ClubPageGUI extends JFrame {
         GridBagConstraints fieldGBC = new GridBagConstraints();
         fieldGBC.insets = new Insets(3, 3, 3, 3);
         fieldGBC.gridwidth = GridBagConstraints.REMAINDER;
-        
         
 	}
 	
