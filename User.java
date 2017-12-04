@@ -124,6 +124,16 @@ public class User {
 		
 		return finalStr;
 	}
+	
+	public Position findMember(Club aClub) {
+		Position p1 = new Position();
+		for(int i = 0; i < management.size(); i++) {
+			if(aClub == management.get(i).getClub()) {
+				p1 =  management.get(i).getPosition();
+			}
+		}
+		return p1;
+	}
 
 	
 }	
