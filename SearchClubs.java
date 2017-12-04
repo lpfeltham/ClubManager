@@ -105,6 +105,7 @@ public class SearchClubs extends JFrame{
 				// maybe set the user to null in all GUI's FIXME
 				//System.exit(0);
 				
+	        	
 			
 			}
 		});
