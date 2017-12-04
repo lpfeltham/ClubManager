@@ -69,6 +69,8 @@ public class ClubGUIDriver {
 		u1.addClub(c1);
 		u1.addClub(c3);
 		
+		u1.updateUserPosition("Officer", c1);
+		
 		app1.addUser(u1);
 		app1.addUser(u2);
 		app1.addUser(u3);

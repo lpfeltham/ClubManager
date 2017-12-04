@@ -104,11 +104,11 @@ public class ClubPageGUI extends JFrame {
 		JList<String> optionString = new JList<>(optionsList);
 		JList<String> eventString = new JList<>(eventList);
 		
-		this.add(edit);
+		this.add(edit, BorderLayout.SOUTH);
+		this.add(optionString, BorderLayout.WEST);
+		this.add(eventString, BorderLayout.EAST);
 		
         pos1 = u1.findMember(c1);
-        
-        
         
 	}
 	

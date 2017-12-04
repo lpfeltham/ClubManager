@@ -97,8 +97,6 @@ public class User {
 		for(int i =0; i< management.size(); i++) {
 			if(management.get(i).getClub().getName().equals(name)) {
 				management.get(i).getClub().removeMember(this);
-
-				
 			}
 		}
 		
@@ -133,6 +131,14 @@ public class User {
 			}
 		}
 		return p1;
+	}
+	
+	public void updateUserPosition(String newPosition, Club aClub) {
+		for(int i = 0; i < management.size(); i++) {
+			if(management.get(i).getClub() == aClub) {
+				management.get(i).setPosition(newPosition);
+			}
+		}
 	}
 
 	
