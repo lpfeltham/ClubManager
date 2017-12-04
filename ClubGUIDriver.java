@@ -86,6 +86,8 @@ public class ClubGUIDriver {
 		
 		c1.addEvent(e1, "Officer Meeting", s1, p1, "Casual", "First officer meeting");
 		
+		app1.addPlace(p1);
+		
 		app1.addUser(u1);
 		app1.addUser(u2);
 		app1.addUser(u3);

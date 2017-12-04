@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -15,6 +16,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class ClubPageGUI extends JFrame {
 	
@@ -129,6 +132,14 @@ public class ClubPageGUI extends JFrame {
 				}
 				else {
 					// Generate edit event name
+					 buildEditEventName();
+					 
+						for(int i = 0; i < c1.getEvents().size(); i++) {
+							eventList.addElement(c1.getEvents().get(i).getName());
+						}
+						
+						JList<String> eventString = new JList<>(eventList);
+						add(eventString, BorderLayout.EAST);	
 				}
 			}
 		});
@@ -157,15 +168,91 @@ public class ClubPageGUI extends JFrame {
         pos1 = u1.findMember(c1);
 	}
 	
-	private void buildEditEventSchedule() {
+	private void buildEditEventName() {
+		JFrame frame = new JFrame("Edit Event Name");
+		frame.setSize(400, 200);
+		JPanel panel = new JPanel(new GridBagLayout());
 		
+		JLabel newNameLabel = new JLabel("New Name for " + e1.getName() + ":");
+		JTextField newNameField = new JTextField(10);
+		
+		// les buttons
+		JButton edit = new JButton("Edit");
+		JButton cancelButton = new JButton("Cancel");
+		
+        frame.setLocationRelativeTo(null);
+        GridBagConstraints labelGBC = new GridBagConstraints();
+        labelGBC.insets = new Insets(3, 3, 3, 3);
+        GridBagConstraints fieldGBC = new GridBagConstraints();
+        fieldGBC.insets = new Insets(3, 3, 3, 3);
+        fieldGBC.gridwidth = GridBagConstraints.REMAINDER;
+        
+        panel.add(newNameLabel, labelGBC);
+        panel.add(newNameField, fieldGBC);
+        
+        panel.add(edit);
+		panel.add(cancelButton);
+		
+		frame.add(panel, BorderLayout.NORTH);
+		
+		frame.setVisible(true);
+		
+		// cancel button closes window
+		cancelButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) {
+				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+			}	
+		});
+		
+		edit.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) {
+				e1.setName(newNameField.getText());
+				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+			}	
+		});
 	}
 	
 	private void buildEditEventPlace() {
+		JFrame frame = new JFrame("Edit Event Place");
+		frame.setSize(400, 200);
+		JPanel panel = new JPanel(new GridBagLayout());
 		
+		JLabel newNameLabel = new JLabel("New Place for " + e1.getName() + ":");
+		JTextField newNameField = new JTextField(10);
+		
+		// les buttons
+		JButton edit = new JButton("Edit");
+		JButton cancelButton = new JButton("Cancel");
+		
+        frame.setLocationRelativeTo(null);
+        GridBagConstraints labelGBC = new GridBagConstraints();
+        labelGBC.insets = new Insets(3, 3, 3, 3);
+        GridBagConstraints fieldGBC = new GridBagConstraints();
+        fieldGBC.insets = new Insets(3, 3, 3, 3);
+        fieldGBC.gridwidth = GridBagConstraints.REMAINDER;
+        
+        panel.add(newNameLabel, labelGBC);
+        panel.add(newNameField, fieldGBC);
+        
+        panel.add(edit);
+		panel.add(cancelButton);
+		
+		frame.add(panel, BorderLayout.NORTH);
+		
+		frame.setVisible(true);
+		
+		// cancel button closes window
+		cancelButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) {
+				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+			}	
+		});
 	}
 	
-	private void buildEditEventName() {
+	private void buildEditEventSchedule() {
 		
 	}
 	

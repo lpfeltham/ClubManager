@@ -6,10 +6,12 @@ public class Application {
 
 	public ArrayList<User> users;
 	public ArrayList<Club> clubs;
+	public ArrayList<Place> places;
 	
 	public Application() {
 		users = new ArrayList<User>();
 		clubs = new ArrayList<Club>();
+		places = new ArrayList<Place>();
 	}
 	
 	public boolean detectNewUserConflict(String userName) {
@@ -75,5 +77,13 @@ public class Application {
 		}
 		
 		return null;
+	}
+	
+	public void addPlace(Place aPlace) {
+		places.add(aPlace);
+	}
+	
+	public ArrayList<Place> getPlaces() {
+		return this.places;
 	}
 }
