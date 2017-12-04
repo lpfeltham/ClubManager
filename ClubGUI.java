@@ -29,6 +29,7 @@ public class ClubGUI extends JFrame {
 	
 	private JButton Login;
 	private JButton SignUp;
+
 	
 	public ClubGUI(String windowTitle, Application AnApp1) 
 	{   
@@ -41,9 +42,6 @@ public class ClubGUI extends JFrame {
 		
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
-		/*this.add(new JLabel("<HTML><center>Welcome to the Club Manager!!" +
-				"<BR>Please login or create a new user<BR></center></HTML>"));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
 		buildGUI();	
 		setVisible(true);
 		
@@ -57,8 +55,11 @@ public class ClubGUI extends JFrame {
 	}
 
 	private void buildGUI() {
+		GridLayout Layout = new GridLayout(0,1);
 		
-		JPanel panel = new JPanel(new GridBagLayout());
+		JPanel panel = new JPanel(Layout); 
+		
+		
 		JLabel placedLabel = new JLabel("<HTML><center>Welcome to the Club Manager!!" + 
 								"<BR>Please login or create a new user<BR></center></HTML>");
         
@@ -71,19 +72,14 @@ public class ClubGUI extends JFrame {
 		
 		Login = new JButton("Login");
 		SignUp = new JButton("Sign Up!");
-		
-		/*this.add(Login);
-		this.add(SignUp);
-		
-		Login.setVisible(true);
-		SignUp.setVisible(true);*/
-		
+		 
 		panel.add(placedLabel, labelGBC);
-		
+
 		panel.add(Login, fieldGBC);
 		panel.add(SignUp, fieldGBC);
 		
 		
+	
 		this.add(panel, BorderLayout.NORTH);
 		
 		// login action event listener

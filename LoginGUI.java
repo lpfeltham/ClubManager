@@ -46,7 +46,9 @@ public class LoginGUI extends JFrame {
 		
 		setLocationRelativeTo(null);
 		
-		this.setLayout(new FlowLayout(FlowLayout.CENTER));
+		GridLayout Layout = new GridLayout(0,1);
+		this.setLayout(Layout);
+		//this.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		this.add(new JLabel("<HTML><center>Welcome to the Club Manager!!\n <BR> </HTML>"));
 		
