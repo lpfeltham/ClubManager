@@ -30,7 +30,7 @@ public class ClubPageGUI extends JFrame {
 	public ClubPageGUI(Club club, User user, Application app) {
 		
 		super(club.getName());
-		this.setSize(300, 300);
+		this.setSize(500, 300);
 		
 		u1 = user;
 		c1 = club;
@@ -86,12 +86,15 @@ public class ClubPageGUI extends JFrame {
 		//this.add(placedDescription);
 		
 		DefaultListModel<String> eventList = new DefaultListModel<>(); 
+		DefaultListModel<String> eventDetails = new DefaultListModel<>(); 
 		DefaultListModel<String> optionsList = new DefaultListModel<>(); 
 		
 		setLocationRelativeTo(null);
 		
 		for(int i = 0; i < c1.getEvents().size(); i++) {
-			eventList.addElement("<HTML><B>" + c1.getEvents().get(i).getName() + 
+			eventList.addElement(c1.getEvents().get(i).getName());
+			
+			eventDetails.addElement("<HTML><B>" + c1.getEvents().get(i).getName() + 
 					"</B><BR>" + c1.getEvents().get(i).getPlace().getAddress() +
 					"<BR>" + c1.getEvents().get(i).getSchedule().getScheduleString() +
 					"</HTML>");
@@ -107,11 +110,13 @@ public class ClubPageGUI extends JFrame {
 		
 		JList<String> optionString = new JList<>(optionsList);
 		JList<String> eventString = new JList<>(eventList);
+		JList<String> eventInfo = new JList<>(eventDetails);
 		
 		this.add(edit, BorderLayout.SOUTH);
 		this.add(optionString, BorderLayout.WEST);
-		this.add(eventString, BorderLayout.EAST);
+		this.add(eventString, BorderLayout.CENTER);
 		this.add(placedLabel, BorderLayout.NORTH);
+		this.add(eventInfo, BorderLayout.EAST);
 		
         pos1 = u1.findMember(c1);
         
@@ -121,15 +126,17 @@ public class ClubPageGUI extends JFrame {
 				String selectedFunction = optionString.getSelectedValue();
 				String selectedEvent = eventString.getSelectedValue();
 				//Event e1 = new Event();
-				
+				System.out.println(selectedEvent);
 				for(int i = 0; i < c1.getEvents().size(); i++) {
 					if(c1.getEvents().get(i).getName().equals(selectedEvent)) {
 						e1 = c1.getEvents().get(i);
+						System.out.println(e1.getName());
 					}
 				}
 				
 				if(selectedFunction.equals("Edit Event Schedule")) {
 					// Generate edit event schedule
+					buildEditEventSchedule();
 					
 				}
 				else if(selectedFunction.equals("Edit Event Place")) {
@@ -242,28 +249,28 @@ public class ClubPageGUI extends JFrame {
 		frame.setVisible(true);
 		
 		// cancel button closes window
-		cancelButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e) {
+		cancelButton.addActionListener(e -> {
 				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}	
-		});
+		);
 		
 		// cancel button closes window
 		edit.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e) {
-				if(app1.doesPlaceExist(newNameField.getText()) == false) {
+				String newTxt = newNameField.getText();
+				if(app1.doesPlaceExist(newTxt) == false) {
 					buildWarningGUI("Error " + newNameField.getText() +
 							" does not exist.", "Error");
 				}
 				else {
-					Place p1 = app1.getPlace(newNameField.getText());
+					Place p1 = app1.getPlace(newTxt);
 					
 					if(p1.detectScheduleConflict(e1.getSchedule()) == true) {
 						buildWarningGUI("Error schedule conflict", "Error");
 					}
 					else {
+						p1.cancelSchedule(e1.getSchedule());
 						e1.setPlace(p1);
 						frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 					}
@@ -274,7 +281,74 @@ public class ClubPageGUI extends JFrame {
 	}
 	
 	private void buildEditEventSchedule() {
+		JFrame frame = new JFrame("Edit Event Schedule");
+		frame.setSize(400, 200);
+		JPanel panel = new JPanel(new GridBagLayout());
 		
+		JLabel newStartHourLabel = new JLabel("New Start Hour for " + e1.getName() + ":");
+		JTextField newStartHour = new JTextField(10);
+		
+		JLabel newEndHourLabel = new JLabel("New End Hour for " + e1.getName() + ":");
+		JTextField newEndHour = new JTextField(10);
+		
+		JLabel newDateLabel = new JLabel("New date Hour for " + e1.getName() + ":");
+		JTextField newDate = new JTextField(10);
+		
+		// les buttons
+		JButton edit = new JButton("Edit");
+		JButton cancelButton = new JButton("Cancel");
+		
+        frame.setLocationRelativeTo(null);
+        GridBagConstraints labelGBC = new GridBagConstraints();
+        labelGBC.insets = new Insets(3, 3, 3, 3);
+        GridBagConstraints fieldGBC = new GridBagConstraints();
+        fieldGBC.insets = new Insets(3, 3, 3, 3);
+        fieldGBC.gridwidth = GridBagConstraints.REMAINDER;
+        
+        panel.add(newStartHourLabel, labelGBC);
+        panel.add(newStartHour, fieldGBC);
+        panel.add(newEndHourLabel, labelGBC);
+        panel.add(newEndHour, fieldGBC);
+        panel.add(newDateLabel, labelGBC);
+        panel.add(newDate, fieldGBC);
+        
+        panel.add(edit);
+		panel.add(cancelButton);
+		
+		frame.add(panel, BorderLayout.NORTH);
+		
+		frame.setVisible(true);
+		
+		// cancel button closes window
+		cancelButton.addActionListener(e -> {
+				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+			}	
+		);
+		
+		// cancel button closes window
+		edit.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) {
+				double newStart = Double.parseDouble(newStartHour.getText());
+				double newEnd = Double.parseDouble(newEndHour.getText());
+				String date = newDate.getText();
+				
+				Schedule s1 = new Schedule();
+				s1.setStartHour(newStart);
+				s1.setEndHour(newEnd);
+				s1.setDate(date);
+				
+				if(e1.getPlace().detectScheduleConflict(s1)) {
+					buildWarningGUI("Error schedule conflict", "Error");
+				}
+				else {
+					e1.getPlace().cancelSchedule(e1.getSchedule());
+					e1.setSchedule(s1);
+					e1.getPlace().addSchedule(s1);
+					frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+				}
+			}	
+		});
 	}
 	
 	private void buildWarningGUI(String printText, String titleText) {

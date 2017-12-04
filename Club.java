@@ -105,6 +105,11 @@ public class Club {
 			events.add(event);
 		}
 	}
+	
+	public void addEvent(Event e1) {
+		this.events.add(e1);
+	}
+	
 	public boolean removeEvent(String name) {
 		for(int i = 0; i < events.size(); i++) {
 			if(events.get(i).getName().equals(name)) {

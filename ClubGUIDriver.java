@@ -70,13 +70,25 @@ public class ClubGUIDriver {
 		u1.addClub(c3);
 		
 		u1.updateUserPosition("Officer", c1);
+		
 		Place p1 = new Place();
 		p1.setAddress("ECE Room 105");
+		
+		Place p2 = new Place();
+		p2.setAddress("ECE Room 555");
+		
 		
 		Schedule s1 = new Schedule();
 		s1.setDate("August 30");
 		s1.setStartHour(9.00);
 		s1.setEndHour(10.00);
+		
+		Schedule s2 = new Schedule();
+		s2.setDate("November 30");
+		s2.setStartHour(9.00);
+		s2.setEndHour(10.00);
+		
+		//p1.addSchedule(s1);
 		
 		Event e1 = new Event();
 		e1.setName("Officer Meeting");
@@ -84,9 +96,22 @@ public class ClubGUIDriver {
 		e1.setSchedule(s1);
 		e1.setPlace(p1);
 		
-		c1.addEvent(e1, "Officer Meeting", s1, p1, "Casual", "First officer meeting");
+		
+		Event e2 = new Event();
+		e2.setName("Big Club Meeting");
+		e2.setDressCode("Casual");
+		e2.setSchedule(s2);
+		e2.setPlace(p2);
+		
+		
+		//p1.addSchedule(s1);
+		System.out.println(p1.getSchedule().get(0).getDate());
+		
+		c1.addEvent(e1);
+		c1.addEvent(e2);
 		
 		app1.addPlace(p1);
+		app1.addPlace(p2);
 		
 		app1.addUser(u1);
 		app1.addUser(u2);

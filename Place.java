@@ -22,21 +22,30 @@ public class Place {
 	}
 	// returns true if there is a conflict
 	public boolean detectScheduleConflict(Schedule aSchedule) {
+		
 		for(int i = 0; i < schedule.size(); i++) {
-			if(aSchedule.getStartHour() >= schedule.get(i).getStartHour() && aSchedule.getStartHour() <= schedule.get(i).getEndHour()) {
-				return true;
-			}
-				
-			if(aSchedule.getEndHour() >= schedule.get(i).getStartHour() && aSchedule.getEndHour() <= schedule.get(i).getEndHour()) {
-				return true;
+			
+			if(aSchedule.getDate().equals(schedule.get(i).getDate())) {
+				if((aSchedule.getStartHour() >= schedule.get(i).getStartHour()) && (aSchedule.getStartHour() <= schedule.get(i).getEndHour())) {
+					System.out.println("it is working?");
+					return true;
+				}
+				if((aSchedule.getEndHour() >= schedule.get(i).getStartHour()) && (aSchedule.getEndHour() <= schedule.get(i).getEndHour())) {
+					return true;
+				}
+				if((aSchedule.getStartHour() < schedule.get(i).getStartHour()) && (aSchedule.getEndHour() > schedule.get(i).getEndHour())) {
+					return true;
+				}
 			}
 		}
+		
 		return false;
 	}
+	
 	public void addSchedule(Schedule aSchedule) {
-		if(detectScheduleConflict(aSchedule)  == false) {
+		//if(detectScheduleConflict(aSchedule)  == false) {
 			this.schedule.add(aSchedule);
-		}
+		//}
 	}
 	
 	public void cancelSchedule(Schedule aSchedule) {
@@ -44,7 +53,5 @@ public class Place {
 			schedule.remove(aSchedule);
 		}
 	}
-	
-	
 	
 }

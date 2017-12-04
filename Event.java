@@ -72,6 +72,7 @@ public class Event {
 	}
 
 	public void setPlace(Place place) {
+		place.addSchedule(this.schedule);
 		this.place = place;
 	}
 

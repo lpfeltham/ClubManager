@@ -39,8 +39,12 @@ public class placeDriver {
 			
 			pa2.addSchedule(s3);
 			
-			pa2.cancelSchedule(s3);
+			//pa2.cancelSchedule(s3);
 			
+			boolean val = pa2.detectScheduleConflict(s3);
 			
+			if(!val) {
+				System.out.println("correct");
+			}
 		}
 }
