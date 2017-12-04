@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -50,7 +51,9 @@ public class LoginGUI extends JFrame {
 		this.setLayout(Layout);
 		//this.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
-		this.add(new JLabel("<HTML><center>Welcome to the Club Manager!!\n <BR> </HTML>"));
+		JLabel Label = new JLabel("<HTML><center>Welcome to the Club Manager!!",SwingConstants.CENTER);
+		this.add(Label);
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		buildGUI();	
@@ -64,66 +67,84 @@ public class LoginGUI extends JFrame {
 		// logout
 		
 		if(u1.getManagement().size() == 0) {
-			JLabel clubLabel = new JLabel(" You are not in any clubs, would you like to join one?");
+			JLabel clubLabel = new JLabel(" You are not in any clubs, would you like to join one?", SwingConstants.CENTER);
 			this.add(clubLabel);
+			
+			JButton logout = new JButton("logout");
+			JButton joinClubs = new JButton("Join a Club");
+			
+			this.add(joinClubs);
+			this.add(logout);
+			
+			
+			logout.addActionListener(new ActionListener() {	
+        		public void actionPerformed(ActionEvent e) {
+        			//u1 = null;
+        			// maybe set the user to null in all GUI's FIXME 
+        			//settings the user to null means they couldn't be added to events, don't do that
+        			System.exit(0);
+        		}
+        	});
+			joinClubs.addActionListener(new ActionListener(){	
+        		public void actionPerformed(ActionEvent e) {
+        			SearchClubs newGUI = new SearchClubs("Search", app1, u1);	
+        		}
+			});
 			
 		}
 		else {
-		JLabel clubLabel = new JLabel("Clubs you are in:");
+			JLabel clubLabel = new JLabel("Clubs you are in:");
 		
-		//setLayout(new GridLayout(1, 1));  
+			//setLayout(new GridLayout(1, 1));  
 		
-		DefaultListModel<String> clubList = new DefaultListModel<>(); 
+			DefaultListModel<String> clubList = new DefaultListModel<>(); 
 		
-		for(int i = 0; i < u1.getManagement().size(); i++) {
-			clubList.addElement(u1.getManagement().get(i).getClub().getName());
-		}
-		
-		JSeparator sep = new JSeparator(); 
-		this.add(sep);
-		
-		this.add(clubLabel);
-		
-		JSeparator sep2 = new JSeparator(); 
-		this.add(sep2);
-		
-        JList<String> list = new JList<>(clubList);  
-        list.setBounds(100,100, 75,75);  
-        this.add(list);
-        
-        JButton logout = new JButton("logout");
-        JButton viewClub = new JButton("View Club Page");
-        JButton joinClubs = new JButton("Join a Club");
-        
-        this.add(viewClub);
-        this.add(logout);
-        this.add(joinClubs);
-        
-        logout.addActionListener(new ActionListener()
-		{	
-			public void actionPerformed(ActionEvent e) {
-				//u1 = null;
-				// maybe set the user to null in all GUI's FIXME 
-				//settings the user to null means they couldn't be added to events, don't do that
-				System.exit(0);
+			for(int i = 0; i < u1.getManagement().size(); i++) {
+				clubList.addElement(u1.getManagement().get(i).getClub().getName());
 			}
-		});
+		
+			//JSeparator sep = new JSeparator(); 
+			this.add(clubLabel);
+		
+			//this.add(clubLabel);
+		
+			//JSeparator sep2 = new JSeparator(); 
+			//this.add(sep2);
+		
+			JList<String> list = new JList<>(clubList);  
+			list.setBounds(100,100, 75,75);  
+			this.add(list);
         
-        viewClub.addActionListener(new ActionListener()
-		{	
-			public void actionPerformed(ActionEvent e) {
-				String selected = list.getSelectedValue();
-				ClubPageGUI newGUI = new ClubPageGUI(u1.getClub(selected).getClub(), u1);
+			JButton logout = new JButton("logout");
+			JButton viewClub = new JButton("View Club Page");
+			JButton joinClubs = new JButton("Join a Club");
+        
+			this.add(viewClub);
+        	this.add(joinClubs);
+        	this.add(logout);
+        
+        	logout.addActionListener(new ActionListener() {	
+        		public void actionPerformed(ActionEvent e) {
+        			//u1 = null;
+        			// maybe set the user to null in all GUI's FIXME 
+        			//settings the user to null means they couldn't be added to events, don't do that
+        			System.exit(0);
+        		}
+        	});
+        
+        	viewClub.addActionListener(new ActionListener(){	
+        		public void actionPerformed(ActionEvent e) {
+        			String selected = list.getSelectedValue();
+					ClubPageGUI newGUI = new ClubPageGUI(u1.getClub(selected).getClub(), u1);
 				
-			}
-		});
+        		}
+        	});
         
-        joinClubs.addActionListener(new ActionListener()
-		{	
-			public void actionPerformed(ActionEvent e) {
-				SearchClubs newGUI = new SearchClubs("Search", app1, u1);	
-			}
-		});
+        	joinClubs.addActionListener(new ActionListener(){	
+        		public void actionPerformed(ActionEvent e) {
+        			SearchClubs newGUI = new SearchClubs("Search", app1, u1);	
+        		}
+			});
 		}
 		
 	}
