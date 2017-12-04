@@ -1,6 +1,7 @@
 package ClubManagement;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -72,8 +73,11 @@ public class ClubGUI extends JFrame {
 		
 		Login = new JButton("Login");
 		SignUp = new JButton("Sign Up!");
-		 
+		Login.setBackground(Color.LIGHT_GRAY);
+		SignUp.setBackground(Color.green);
+		
 		panel.add(placedLabel, labelGBC);
+		
 
 		panel.add(Login, fieldGBC);
 		panel.add(SignUp, fieldGBC);
