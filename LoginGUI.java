@@ -137,7 +137,7 @@ public class LoginGUI extends JFrame {
         	viewClub.addActionListener(new ActionListener(){	
         		public void actionPerformed(ActionEvent e) {
         			String selected = list.getSelectedValue();
-					ClubPageGUI newGUI = new ClubPageGUI(u1.getClub(selected).getClub(), u1);
+					ClubPageGUI newGUI = new ClubPageGUI(u1.getClub(selected).getClub(), u1, app1);
 				
         		}
         	});

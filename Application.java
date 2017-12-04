@@ -86,4 +86,24 @@ public class Application {
 	public ArrayList<Place> getPlaces() {
 		return this.places;
 	}
+	
+	public boolean doesPlaceExist(String p1) {
+		for(int i = 0; i < places.size(); i++) {
+			if(places.get(i).getAddress().equals(p1)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public Place getPlace(String p1) {
+		Place aPlace = new Place();
+		for(int i = 0; i < places.size(); i++) {
+			if(places.get(i).getAddress().equals(p1)) {
+				aPlace = places.get(i);
+			}
+		}
+		return aPlace;
+	}
 }

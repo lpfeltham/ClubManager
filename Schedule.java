@@ -31,6 +31,8 @@ public class Schedule {
 	public String getScheduleString() {
 		String final_str = "";
 		
+		final_str = date + " " + Double.toString(startHour) + " - " + Double.toString(endHour);
+		
 		return final_str;
 	}
 }

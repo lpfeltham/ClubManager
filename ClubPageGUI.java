@@ -25,8 +25,9 @@ public class ClubPageGUI extends JFrame {
 	private Event e1;
 	private Position pos1;
 	private Club c1;
+	private Application app1;
 	
-	public ClubPageGUI(Club club, User user) {
+	public ClubPageGUI(Club club, User user, Application app) {
 		
 		super(club.getName());
 		this.setSize(300, 300);
@@ -34,6 +35,7 @@ public class ClubPageGUI extends JFrame {
 		u1 = user;
 		c1 = club;
 		e1 = new Event();
+		app1 = app;
 		
 		this.setLayout(new BorderLayout());
 		setVisible(true);
@@ -89,7 +91,10 @@ public class ClubPageGUI extends JFrame {
 		setLocationRelativeTo(null);
 		
 		for(int i = 0; i < c1.getEvents().size(); i++) {
-			eventList.addElement(c1.getEvents().get(i).getName());
+			eventList.addElement("<HTML><B>" + c1.getEvents().get(i).getName() + 
+					"</B><BR>" + c1.getEvents().get(i).getPlace().getAddress() +
+					"<BR>" + c1.getEvents().get(i).getSchedule().getScheduleString() +
+					"</HTML>");
 		}
 		
 		if(c1.getEvents().size() == 0) {
@@ -123,23 +128,16 @@ public class ClubPageGUI extends JFrame {
 					}
 				}
 				
-				if(selectedEvent.equals("Edit Event Schedule")) {
+				if(selectedFunction.equals("Edit Event Schedule")) {
 					// Generate edit event schedule
 					
 				}
-				else if(selectedEvent.equals("Edit Event Place")) {
-					// Generate edit event place
+				else if(selectedFunction.equals("Edit Event Place")) {
+					buildEditEventPlace();
 				}
 				else {
 					// Generate edit event name
-					 buildEditEventName();
-					 	
-						/*for(int i = 0; i < c1.getEvents().size(); i++) {
-							eventList.addElement(c1.getEvents().get(i).getName());
-						}
-						DefaultListModel<String> eventListNew = new DefaultListModel<>(); 
-						JList<String> eventString = new JList<>(eventListNew);
-						add(eventString, BorderLayout.EAST);*/	
+					 buildEditEventName();	
 				}
 			}
 		});
@@ -250,10 +248,61 @@ public class ClubPageGUI extends JFrame {
 				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}	
 		});
+		
+		// cancel button closes window
+		edit.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) {
+				if(app1.doesPlaceExist(newNameField.getText()) == false) {
+					buildWarningGUI("Error " + newNameField.getText() +
+							" does not exist.", "Error");
+				}
+				else {
+					Place p1 = app1.getPlace(newNameField.getText());
+					
+					if(p1.detectScheduleConflict(e1.getSchedule()) == true) {
+						buildWarningGUI("Error schedule conflict", "Error");
+					}
+					else {
+						e1.setPlace(p1);
+						frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+					}
+				}
+			}	
+		});
+		
 	}
 	
 	private void buildEditEventSchedule() {
 		
+	}
+	
+	private void buildWarningGUI(String printText, String titleText) {
+		JFrame warning = new JFrame(titleText);
+		warning.setSize(300, 200);
+		JPanel panelWarning = new JPanel(new GridBagLayout());
+		
+        warning.setLocationRelativeTo(null);
+        GridBagConstraints labelGBCWarning = new GridBagConstraints();
+        labelGBCWarning.insets = new Insets(3, 3, 3, 3);
+        labelGBCWarning.gridwidth = GridBagConstraints.REMAINDER;
+		
+		JLabel warningStr = new JLabel(printText);
+		JButton warningOkButton = new JButton("Ok");
+		
+		panelWarning.add(warningStr, labelGBCWarning);
+		panelWarning.add(warningOkButton);
+		
+		warning.add(panelWarning, BorderLayout.NORTH);
+		
+		warning.setVisible(true);
+		
+		warningOkButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) {
+				warning.dispatchEvent(new WindowEvent(warning, WindowEvent.WINDOW_CLOSING));
+			}	
+		});
 	}
 	
 }
