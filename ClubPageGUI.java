@@ -1,5 +1,7 @@
 package ClubManagement;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,12 +13,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class ClubPageGUI extends JFrame {
+	private User u1;
+	private President p1;
+	private Officer o1;
+	private Member m1;
+	
+	private Club c1;
+	
 	
 	public ClubPageGUI(Club club, User user) {
+		
 		super(club.getName());
 		this.setSize(300, 300);
-		this.setLayout(new FlowLayout(FlowLayout.CENTER));
+		
+		u1 = user;
+		c1 = club;
+		
+		//this.setLayout(new FlowLayout(FlowLayout.CENTER));
+		//this.setLayout(new FlowLayout(FlowLayout.TRAILING));
+		this.setLayout(new BorderLayout());
 		setVisible(true);
+		
 		switch(user.getClub(club.getName()).getPosition().getName()){
 		case "Member":
 			buildMemberGUI(club);
@@ -31,21 +48,14 @@ public class ClubPageGUI extends JFrame {
 	}
 
 	private void buildMemberGUI(Club club) {
-		JPanel panel = new JPanel(new GridBagLayout());
 		JLabel placedLabel = new JLabel(club.getName());
-		
-		setLocationRelativeTo(null);
-        GridBagConstraints labelGBC = new GridBagConstraints();
-        labelGBC.insets = new Insets(3, 3, 3, 3);
-        GridBagConstraints fieldGBC = new GridBagConstraints();
-        fieldGBC.insets = new Insets(3, 3, 3, 3);
-        fieldGBC.gridwidth = GridBagConstraints.REMAINDER;
-        
         JButton leave = new JButton("Leave Club");
-        panel.add(leave);
+        JPanel panel = new JPanel();
         
-        this.add(panel, BorderLayout.NORTH);
-        
+   
+        leave.setBackground(Color.RED);;
+       
+        this.add(leave, BorderLayout.SOUTH);
 	}
 	
 	private void buildOfficerGUI(Club club) {
