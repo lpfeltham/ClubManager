@@ -70,6 +70,21 @@ public class ClubGUIDriver {
 		u1.addClub(c3);
 		
 		u1.updateUserPosition("Officer", c1);
+		Place p1 = new Place();
+		p1.setAddress("ECE Room 105");
+		
+		Schedule s1 = new Schedule();
+		s1.setDate("August 30");
+		s1.setStartHour(9.00);
+		s1.setEndHour(10.00);
+		
+		Event e1 = new Event();
+		e1.setName("Officer Meeting");
+		e1.setDressCode("Casual");
+		e1.setSchedule(s1);
+		e1.setPlace(p1);
+		
+		c1.addEvent(e1, "Officer Meeting", s1, p1, "Casual", "First officer meeting");
 		
 		app1.addUser(u1);
 		app1.addUser(u2);
