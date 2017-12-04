@@ -133,13 +133,13 @@ public class ClubPageGUI extends JFrame {
 				else {
 					// Generate edit event name
 					 buildEditEventName();
-					 
-						for(int i = 0; i < c1.getEvents().size(); i++) {
+					 	
+						/*for(int i = 0; i < c1.getEvents().size(); i++) {
 							eventList.addElement(c1.getEvents().get(i).getName());
 						}
-						
-						JList<String> eventString = new JList<>(eventList);
-						add(eventString, BorderLayout.EAST);	
+						DefaultListModel<String> eventListNew = new DefaultListModel<>(); 
+						JList<String> eventString = new JList<>(eventListNew);
+						add(eventString, BorderLayout.EAST);*/	
 				}
 			}
 		});

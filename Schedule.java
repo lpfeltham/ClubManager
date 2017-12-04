@@ -27,4 +27,10 @@ public class Schedule {
 	public void setDate(String date) {
 		this.date = date;
 	}
+	
+	public String getScheduleString() {
+		String final_str = "";
+		
+		return final_str;
+	}
 }
