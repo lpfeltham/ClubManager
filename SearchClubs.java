@@ -1,7 +1,9 @@
 package ClubManagement;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -17,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
 public class SearchClubs extends JFrame{
 	private Application app1;
@@ -38,7 +41,9 @@ public class SearchClubs extends JFrame{
 		
 		setLocationRelativeTo(null);
 		
-		setLayout(new FlowLayout(FlowLayout.LEFT));
+		//setLayout(new FlowLayout(FlowLayout.LEFT));
+		GridLayout Layout = new GridLayout(0,1);
+		this.setLayout(Layout);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		buildGUI();	
@@ -50,7 +55,10 @@ public class SearchClubs extends JFrame{
 		// go to club pages
 		// logout
 		
-		JLabel clubLabel = new JLabel("Clubs you are not in:");
+		JLabel clubLabel = new JLabel("Clubs you are not in:",SwingConstants.CENTER);
+		clubLabel.setFont(new Font("Serif", Font.BOLD, 24));
+		
+		
 		
 		//setLayout(new GridLayout(0, 1));  
 		
@@ -62,20 +70,21 @@ public class SearchClubs extends JFrame{
 			}
 		}
 		
-		JSeparator sep = new JSeparator(); 
-		this.add(sep);
+		//JSeparator sep = new JSeparator(); 
+		//this.add(sep);
 		
 		this.add(clubLabel);
 		
-		JSeparator sep2 = new JSeparator(); 
-		this.add(sep2);
+		//JSeparator sep2 = new JSeparator(); 
+		//this.add(sep2);
 		
         JList<String> list = new JList<>(clubList);  
-        list.setBounds(100,0, 75,75);  
+        //list.setBounds(100,0, 75,75);  
         this.add(list);
         
         JButton logout = new JButton("logout");
         JButton viewClub = new JButton("View Club Page");
+        
         
         this.add(viewClub);
         this.add(logout);
@@ -95,6 +104,8 @@ public class SearchClubs extends JFrame{
 				//u1 = null;
 				// maybe set the user to null in all GUI's FIXME
 				//System.exit(0);
+				
+			
 			}
 		});
 		
