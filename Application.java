@@ -107,4 +107,16 @@ public class Application {
 		return aPlace;
 	}
 	
+	public User getUser(String aName) {
+		User u1 = new User();
+		
+		for(int i = 0; i < users.size(); i++) {
+			if(users.get(i).getName().equals(aName)) {
+				u1 = users.get(i);
+			}
+		}
+		
+		return u1;
+	}
+	
 }

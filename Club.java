@@ -159,10 +159,8 @@ public class Club {
 			president.getClub(name).setPosition("President");
 		}
 		else {
-			
+			//president.getClub(name).setPosition("President");
 		}
-		
-		//president.getClub(name).setPosition("President");
 	}
 	public void changePresident(User president) {
 		this.president.getClub(name).setPosition("Member");
