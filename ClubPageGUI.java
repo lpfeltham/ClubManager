@@ -599,8 +599,8 @@ public class ClubPageGUI extends JFrame {
 		JFrame frame = new JFrame("User Info");
 
 		// panel.add(...);
-		//String str = c1.printUsersScroller();
-		String str = "hello world";
+		String str = c1.printUsersScroller();
+		//String str = "hello world";
 		JTextArea textSpace = new JTextArea(50, 150);
 		textSpace.setText(str);
 		

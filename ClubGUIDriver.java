@@ -18,31 +18,31 @@ public class ClubGUIDriver {
 		c1.setDues(15.00);
 		c1.setDescription("A romp and a riot");
 		c1.setFunds(0.00);
-		c1.setPresident(null);
+		//c1.setPresident(null);
 		
 		c2.setName("Baja");
 		c2.setDues(13.00);
 		c2.setDescription("a club that is dangerous for cars but fun for people");
 		c2.setFunds(0.00);
-		c2.setPresident(null);
+		//c2.setPresident(null);
 		
 		c3.setName("UA Autonomous");
 		c3.setDues(10.00);
 		c3.setDescription("We fly stuff sometimes");
 		c3.setFunds(0.00);
-		c3.setPresident(null);
+		//c3.setPresident(null);
 		
 		c4.setName("Hacks");
 		c4.setDues(11.00);
 		c4.setDescription("servers");
 		c4.setFunds(0.00);
-		c4.setPresident(null);
+		//c4.setPresident(null);
 		
 		c5.setName("Booty Call Club");
 		c5.setDues(18.00);
 		c5.setDescription("We booty call");
 		c5.setFunds(0.00);
-		c5.setPresident(null);
+		//c5.setPresident(null);
 		
 		app1.addClub(c1);
 		app1.addClub(c2);
@@ -72,9 +72,9 @@ public class ClubGUIDriver {
 		u2.addClub(c1);
 		u3.addClub(c1);
 		
-		u2.updateUserPosition("Officer", c1);
+		c1.addOfficer(u2);
 		
-		u1.updateUserPosition("President", c1);
+		c1.setPresident(u1);
 		
 		Place p1 = new Place();
 		p1.setAddress("ECE Room 105");

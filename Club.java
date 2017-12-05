@@ -145,12 +145,16 @@ public class Club {
 		return officers;
 	}
 	public void addOfficer(User user) {
-		user.getClub(name).setPosition("Officer");
-		officers.add(user);
+		if(user.findPosition(this)!= "Officer") {
+			user.getClub(name).setPosition("Officer");
+			officers.add(user);
+		}
 	}
 	public void removeOfficer(User user) {
-		user.getClub(name).setPosition("Member");
-		officers.remove(user);
+		if(user.findPosition(this)!= "President") {
+			user.getClub(name).setPosition("Member");
+			officers.remove(user);
+		}
 	}
 	
 	public String getDescription() {
@@ -180,7 +184,6 @@ public class Club {
 	public void addUserToClub(User newUser) {
 		if(!(checkUserConflict(newUser))) {
 			this.members.add(newUser);
-			newUser.updateUserPosition("Member", this);
 		}
 		else {
 			System.out.println("already a member");
