@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +22,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class ClubPageGUI extends JFrame {
 	
@@ -33,14 +35,18 @@ public class ClubPageGUI extends JFrame {
 	public ClubPageGUI(Club club, User user, Application app) {
 		
 		super(club.getName());
-		this.setSize(500, 300);
+		//this.setSize(500, 300);
 		
 		u1 = user;
 		c1 = club;
 		e1 = new Event();
 		app1 = app;
 		
-		this.setLayout(new BorderLayout());
+		setSize(200, 800);
+		setLocationRelativeTo(null);
+	
+		this.setLayout(new FlowLayout(FlowLayout.CENTER));
+		
 		setVisible(true);
 		
 		switch(user.getClub(club.getName()).getPosition().getName()){
@@ -57,8 +63,8 @@ public class ClubPageGUI extends JFrame {
 	}
 
 	private void buildMemberGUI(Club club) {
-		JLabel placedLabel = new JLabel("  Welcome to " + club.getName());
-		JLabel placedDescription = new JLabel("  " + club.getDescription());
+		JLabel placedLabel = new JLabel("  Welcome to " + club.getName(),SwingConstants.CENTER);
+		JLabel placedDescription = new JLabel("  " + club.getDescription(),SwingConstants.CENTER);
         JButton leave = new JButton("Leave Club");
         //JPanel panel = new JPanel();
    
@@ -80,20 +86,28 @@ public class ClubPageGUI extends JFrame {
 	}
 	
 	private void buildOfficerGUI(Club club) {
-		//JPanel panel = new JPanel(new GridBagLayout());
-		JLabel placedLabel = new JLabel("  Welcome to " + club.getName());
-		JLabel placedDescription = new JLabel("  " + club.getDescription());
-		JButton edit = new JButton("Edit Event");
+		GridLayout Layout = new GridLayout(0,1);
+		JPanel panel = new JPanel(Layout); 
 		
-		//this.add(placedLabel);
-		//this.add(placedDescription);
+		JLabel placedLabel = new JLabel("  Welcome to " + club.getName(),SwingConstants.CENTER);
+		JLabel placedDescription = new JLabel("  " + club.getDescription(),SwingConstants.CENTER);
+		JButton edit = new JButton("Your schedule of events: ");
 		
 		DefaultListModel<String> eventList = new DefaultListModel<>(); 
 		DefaultListModel<String> eventDetails = new DefaultListModel<>(); 
 		DefaultListModel<String> optionsList = new DefaultListModel<>(); 
 		
 		setLocationRelativeTo(null);
+        GridBagConstraints labelGBC = new GridBagConstraints();
+        labelGBC.insets = new Insets(3, 3, 3, 3);
+        GridBagConstraints fieldGBC = new GridBagConstraints();
+        fieldGBC.insets = new Insets(3, 3, 3, 3);
+        fieldGBC.gridwidth = GridBagConstraints.REMAINDER;
 		
+        eventList.addElement(" ");
+        eventList.addElement("Event names: ");
+        eventList.addElement(" ");
+        
 		for(int i = 0; i < c1.getEvents().size(); i++) {
 			eventList.addElement(c1.getEvents().get(i).getName());
 			
@@ -107,6 +121,8 @@ public class ClubPageGUI extends JFrame {
 			eventList.addElement("NoEvents");
 		}
 		
+		optionsList.addElement("Options:");
+		optionsList.addElement(" ");
 		optionsList.addElement("Edit Event Schedule");
 		optionsList.addElement("Edit Event Place");
 		optionsList.addElement("Edit Event Name");
@@ -115,11 +131,14 @@ public class ClubPageGUI extends JFrame {
 		JList<String> eventString = new JList<>(eventList);
 		JList<String> eventInfo = new JList<>(eventDetails);
 		
-		this.add(edit, BorderLayout.SOUTH);
-		this.add(optionString, BorderLayout.WEST);
-		this.add(eventString, BorderLayout.CENTER);
-		this.add(placedLabel, BorderLayout.NORTH);
-		this.add(eventInfo, BorderLayout.EAST);
+		this.add(placedLabel,labelGBC);
+		this.add(placedDescription,labelGBC);
+		panel.add(optionString,fieldGBC);
+		panel.add(eventString,fieldGBC);
+		panel.add(eventInfo,fieldGBC);
+		panel.add(edit,fieldGBC);
+		
+		this.add(panel, BorderLayout.NORTH);
 		
         pos1 = u1.findMember(c1);
         
@@ -155,22 +174,30 @@ public class ClubPageGUI extends JFrame {
 	}
 	
 	private void buildPresidentGUI(Club club) {
-		//JPanel panel = new JPanel(new GridBagLayout());
-				JLabel placedLabel = new JLabel("  Welcome to " + club.getName());
-				JLabel placedDescription = new JLabel("  " + club.getDescription());
+		GridLayout Layout = new GridLayout(0,1);
+		JPanel panel = new JPanel(Layout); 
+
+				JLabel placedLabel = new JLabel("  Welcome to " + club.getName(),SwingConstants.CENTER);
+				JLabel placedDescription = new JLabel("  " + club.getDescription(),SwingConstants.CENTER);
 				JButton edit = new JButton("Edit Event");
 				JButton newEvent = new JButton("Add an Event");
 				
-				
-				//this.add(placedLabel);
-				//this.add(placedDescription);
 				
 				DefaultListModel<String> eventList = new DefaultListModel<>(); 
 				DefaultListModel<String> eventDetails = new DefaultListModel<>(); 
 				DefaultListModel<String> optionsList = new DefaultListModel<>(); 
 				
 				setLocationRelativeTo(null);
+		        GridBagConstraints labelGBC = new GridBagConstraints();
+		        labelGBC.insets = new Insets(3, 3, 3, 3);
+		        GridBagConstraints fieldGBC = new GridBagConstraints();
+		        fieldGBC.insets = new Insets(3, 3, 3, 3);
+		        fieldGBC.gridwidth = GridBagConstraints.REMAINDER;
 				
+		        eventList.addElement(" ");
+		        eventList.addElement("Event names: ");
+		        eventList.addElement(" ");
+		        
 				for(int i = 0; i < c1.getEvents().size(); i++) {
 					eventList.addElement(c1.getEvents().get(i).getName());
 					
@@ -184,6 +211,8 @@ public class ClubPageGUI extends JFrame {
 					eventList.addElement("NoEvents");
 				}
 				
+				optionsList.addElement("Options:");
+				optionsList.addElement(" ");
 				optionsList.addElement("Edit Event Schedule");
 				optionsList.addElement("Edit Event Place");
 				optionsList.addElement("Edit Event Name");
@@ -197,11 +226,14 @@ public class ClubPageGUI extends JFrame {
 				JList<String> eventString = new JList<>(eventList);
 				JList<String> eventInfo = new JList<>(eventDetails);
 				
-				this.add(edit, BorderLayout.SOUTH);
-				this.add(optionString, BorderLayout.WEST);
-				this.add(eventString, BorderLayout.CENTER);
-				this.add(placedLabel, BorderLayout.NORTH);
-				this.add(eventInfo, BorderLayout.EAST);
+				this.add(placedLabel,labelGBC);
+				this.add(placedDescription,labelGBC);
+				panel.add(optionString,fieldGBC);
+				panel.add(eventString,fieldGBC);
+				panel.add(eventInfo,fieldGBC);
+				panel.add(edit,fieldGBC);
+				
+				this.add(panel, BorderLayout.NORTH);
 				
 		        pos1 = u1.findMember(c1);
 		        

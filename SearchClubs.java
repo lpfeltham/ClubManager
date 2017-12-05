@@ -93,9 +93,8 @@ public class SearchClubs extends JFrame{
         logout.addActionListener(new ActionListener()
 		{	
 			public void actionPerformed(ActionEvent e) {
-				u1 = null;
-				// maybe set the user to null in all GUI's FIXME
-				System.exit(0);
+				ClubGUI newGUI = new ClubGUI("ClubGUI", app1);	
+    			dispose();
 			}
 		});
         
