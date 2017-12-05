@@ -583,7 +583,7 @@ public class ClubPageGUI extends JFrame {
 					buildWarningGUI("Error, user not in club. Maybe you should invite them?", "Error");
 				}
 				else if(newOfficer.findPosition(c1).equals("Member")) {
-					newOfficer.updateUserPosition("Officer", c1);
+					c1.addOfficer(u1);
 				}
 				
 				else {
