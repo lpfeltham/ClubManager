@@ -133,14 +133,4 @@ public class User {
 		return p1;
 	}
 	
-	public void updateUserPosition(String newPosition, Club aClub) {
-		for(int i = 0; i < management.size(); i++) {
-			switch(this.findPosition(aClub)) {
-			case "Officer": aClub.removeOfficer(this); break;
-			}
-
-		}
-	}
-
-	
 }	
