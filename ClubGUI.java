@@ -73,7 +73,7 @@ public class ClubGUI extends JFrame {
 		
 		Login = new JButton("Login");
 		SignUp = new JButton("Sign Up!");
-		Login.setBackground(Color.LIGHT_GRAY);
+		Login.setBackground(Color.cyan);
 		SignUp.setBackground(Color.green);
 		
 		panel.add(placedLabel, labelGBC);
@@ -142,6 +142,9 @@ public class ClubGUI extends JFrame {
         panel.add(stuDeptLabel, labelGBC);
         panel.add(passwordText, fieldGBC);
         
+        okButton.setBackground(Color.green);
+        cancelButton.setBackground(Color.red);
+        
         panel.add(okButton);
 		panel.add(cancelButton);
 		
@@ -168,6 +171,7 @@ public class ClubGUI extends JFrame {
 				
 				if(u1 == null) {
 					buildWarningGUI("User or password incorrect.", "Error");
+					
 				}
 				else {
 					frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
@@ -179,13 +183,6 @@ public class ClubGUI extends JFrame {
 				
 			}	
 		});
-		
-		/*if(u1 != null) {
-			return true;
-		}
-		return false;*/
-		
-		
 	}
 	
 	private void buildSignUpGUI() {

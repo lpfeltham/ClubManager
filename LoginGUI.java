@@ -50,7 +50,6 @@ public class LoginGUI extends JFrame {
 		
 		GridLayout Layout = new GridLayout(0,1);
 		this.setLayout(Layout);
-		//this.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		JLabel Label = new JLabel("<HTML><center>Welcome to the Club Manager!!",SwingConstants.CENTER);
 		this.add(Label);
@@ -74,7 +73,9 @@ public class LoginGUI extends JFrame {
 			JButton logout = new JButton("logout");
 			JButton joinClubs = new JButton("Join a Club");
 			
+			logout.setBackground(Color.RED);
 			joinClubs.setBackground(Color.GREEN);
+			
 			this.add(joinClubs);
 			this.add(logout);
 			
@@ -105,13 +106,7 @@ public class LoginGUI extends JFrame {
 				clubList.addElement(u1.getManagement().get(i).getClub().getName());
 			}
 		
-			//JSeparator sep = new JSeparator(); 
 			this.add(clubLabel);
-		
-			//this.add(clubLabel);
-		
-			//JSeparator sep2 = new JSeparator(); 
-			//this.add(sep2);
 		
 			JList<String> list = new JList<>(clubList);  
 			list.setBounds(100,100, 75,75);  
@@ -120,6 +115,8 @@ public class LoginGUI extends JFrame {
 			JButton logout = new JButton("logout");
 			JButton viewClub = new JButton("View Club Page");
 			JButton joinClubs = new JButton("Join a Club");
+			
+			logout.setBackground(Color.RED);
         
 			this.add(viewClub);
         	this.add(joinClubs);
