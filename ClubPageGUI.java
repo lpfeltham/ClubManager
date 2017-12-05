@@ -152,25 +152,97 @@ public class ClubPageGUI extends JFrame {
 	}
 	
 	private void buildPresidentGUI(Club club) {
-		JPanel panel = new JPanel(new GridBagLayout());
-		JLabel placedLabel = new JLabel("  Welcome to " + club.getName());
-		
-		setLocationRelativeTo(null);
-        GridBagConstraints labelGBC = new GridBagConstraints();
-        labelGBC.insets = new Insets(3, 3, 3, 3);
-        GridBagConstraints fieldGBC = new GridBagConstraints();
-        fieldGBC.insets = new Insets(3, 3, 3, 3);
-        fieldGBC.gridwidth = GridBagConstraints.REMAINDER;
-        
-        JButton setDues = new JButton("Set Member Dues");
-        JButton funds = new JButton("View Club Funds");
-        
-        panel.add(setDues, fieldGBC);
-        panel.add(funds, fieldGBC);
-        
-        this.add(panel, BorderLayout.NORTH);
-        
-        pos1 = u1.findMember(c1);
+		//JPanel panel = new JPanel(new GridBagLayout());
+				JLabel placedLabel = new JLabel("  Welcome to " + club.getName());
+				JLabel placedDescription = new JLabel("  " + club.getDescription());
+				JButton edit = new JButton("Edit Event");
+				JButton newEvent = new JButton("Add an Event");
+				
+				
+				//this.add(placedLabel);
+				//this.add(placedDescription);
+				
+				DefaultListModel<String> eventList = new DefaultListModel<>(); 
+				DefaultListModel<String> eventDetails = new DefaultListModel<>(); 
+				DefaultListModel<String> optionsList = new DefaultListModel<>(); 
+				
+				setLocationRelativeTo(null);
+				
+				for(int i = 0; i < c1.getEvents().size(); i++) {
+					eventList.addElement(c1.getEvents().get(i).getName());
+					
+					eventDetails.addElement("<HTML><B>" + c1.getEvents().get(i).getName() + 
+							"</B><BR>" + c1.getEvents().get(i).getPlace().getAddress() +
+							"<BR>" + c1.getEvents().get(i).getSchedule().getScheduleString() +
+							"</HTML>");
+				}
+				
+				if(c1.getEvents().size() == 0) {
+					eventList.addElement("NoEvents");
+				}
+				
+				optionsList.addElement("Edit Event Schedule");
+				optionsList.addElement("Edit Event Place");
+				optionsList.addElement("Edit Event Name");
+				optionsList.addElement("Remove Event");
+				optionsList.addElement("Add Event");
+				
+				JList<String> optionString = new JList<>(optionsList);
+				JList<String> eventString = new JList<>(eventList);
+				JList<String> eventInfo = new JList<>(eventDetails);
+				
+				this.add(edit, BorderLayout.SOUTH);
+				this.add(optionString, BorderLayout.WEST);
+				this.add(eventString, BorderLayout.CENTER);
+				this.add(placedLabel, BorderLayout.NORTH);
+				this.add(eventInfo, BorderLayout.EAST);
+				
+		        pos1 = u1.findMember(c1);
+		        
+				// sign up action event listener
+				edit.addActionListener(new ActionListener() {	
+					public void actionPerformed(ActionEvent e) {
+						String selectedFunction = optionString.getSelectedValue();
+						String selectedEvent = eventString.getSelectedValue();
+						//Event e1 = new Event();
+						System.out.println(selectedEvent);
+						for(int i = 0; i < c1.getEvents().size(); i++) {
+							if(c1.getEvents().get(i).getName().equals(selectedEvent)) {
+								e1 = c1.getEvents().get(i);
+								System.out.println(e1.getName());
+							}
+						}
+						
+						if(selectedFunction.equals("Edit Event Schedule")) {
+							// Generate edit event schedule
+							buildEditEventSchedule();
+							
+						}
+						else if(selectedFunction.equals("Edit Event Place")) {
+							buildEditEventPlace();
+						}
+						else if(selectedFunction.equals("Remove Event")) {
+							// remove event from event list in club
+							c1.removeEvent(e1.getName());
+							// remove event from schedule list in place
+							Place p1 = e1.getPlace();
+							p1.cancelSchedule(e1.getSchedule());
+						}
+						else if(selectedFunction.equals("Add Event")) {
+							buildNewEventGUI();
+						}
+						else {
+							// Generate edit event name
+							 buildEditEventName();	
+						}
+					}
+				});
+				newEvent.addActionListener(new ActionListener() {	
+					public void actionPerformed(ActionEvent e) {
+						// Build new event GUI
+						buildNewEventGUI();
+					}
+				});
 	}
 	
 	private void buildEditEventName() {
@@ -349,6 +421,72 @@ public class ClubPageGUI extends JFrame {
 				}
 			}	
 		});
+	}
+	
+	private void buildNewEventGUI() {
+		JFrame frame = new JFrame("Add an event!");
+		frame.setSize(400, 200);
+		JPanel panel = new JPanel(new GridBagLayout());
+		
+		JLabel newNameLabel = new JLabel("Event Name: ");
+		JTextField newName = new JTextField(10);
+		
+		JLabel newPlaceLabel = new JLabel("Event Place: ");
+		JTextField newPlace = new JTextField(10);
+		
+		JLabel newStartLabel = new JLabel("Event Start Hour: ");
+		JTextField newStartHour = new JTextField(10);
+		
+		JLabel newEndLabel = new JLabel("Event End Hour: ");
+		JTextField newEndHour = new JTextField(10);
+		
+		JLabel newDateLabel = new JLabel("Event Date: ");
+		JTextField newDate = new JTextField(10);
+		
+		// les buttons
+		JButton edit = new JButton("Add Event!");
+		JButton cancelButton = new JButton("Cancel");
+		
+        frame.setLocationRelativeTo(null);
+        GridBagConstraints labelGBC = new GridBagConstraints();
+        labelGBC.insets = new Insets(3, 3, 3, 3);
+        GridBagConstraints fieldGBC = new GridBagConstraints();
+        fieldGBC.insets = new Insets(3, 3, 3, 3);
+        fieldGBC.gridwidth = GridBagConstraints.REMAINDER;
+        
+        panel.add(newNameLabel, labelGBC);
+        panel.add(newName, fieldGBC);
+        
+        panel.add(newPlaceLabel, labelGBC);
+        panel.add(newPlace, fieldGBC);
+        
+        panel.add(newStartLabel, labelGBC);
+        panel.add(newStartHour, fieldGBC);
+        
+        panel.add(newEndLabel, labelGBC);
+        panel.add(newEndHour, fieldGBC);
+        
+        panel.add(newDateLabel, labelGBC);
+        panel.add(newDate, fieldGBC);
+        
+        panel.add(edit);
+		panel.add(cancelButton);
+		
+		frame.add(panel, BorderLayout.NORTH);
+		
+		frame.setVisible(true);
+		
+		// cancel button closes window
+		cancelButton.addActionListener(e -> {
+				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+			}	
+		);
+		
+		// cancel button closes window
+		edit.addActionListener(e -> {
+				
+			}	
+		);
 	}
 	
 	private void buildWarningGUI(String printText, String titleText) {
