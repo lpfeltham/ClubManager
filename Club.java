@@ -179,7 +179,7 @@ public class Club {
 	public void addUserToClub(User newUser) {
 		if(!(checkUserConflict(newUser))) {
 			this.members.add(newUser);
-			
+			newUser.updateUserPosition("Member", this);
 		}
 		else {
 			System.out.println("already a member");

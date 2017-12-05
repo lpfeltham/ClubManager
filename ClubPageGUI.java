@@ -417,6 +417,7 @@ public class ClubPageGUI extends JFrame {
 					e1.getPlace().cancelSchedule(e1.getSchedule());
 					e1.setSchedule(s1);
 					e1.getPlace().addSchedule(s1);
+					
 					frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 				}
 			}	
