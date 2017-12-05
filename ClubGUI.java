@@ -91,6 +91,7 @@ public class ClubGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(u1 == null) {
 					buildLoginGUI();
+					//();
 				}
 				else {
 					buildWarningGUI("Already logged in " + u1.getName() + ".", "Event Update");
@@ -178,7 +179,9 @@ public class ClubGUI extends JFrame {
 					//buildWarningGUI("logged in.", "Event Update");
 					
 					//returnVar = true;
-					LoginGUI logged_in = new LoginGUI("Welcome " + u1.getName(), app1, u1);
+					//LoginGUI logged_in = new LoginGUI("Welcome " + u1.getName(), app1, u1);
+					InitialGUI startGUI = new InitialGUI("Welcome " + u1.getName(), app1, u1);
+					
 				}
 				
 			}	

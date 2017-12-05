@@ -238,7 +238,7 @@ public class ClubPageGUI extends JFrame {
 							buildNewEventGUI();
 						}
 						else if(selectedFunction.equals("Change President")) {
-							
+							buildChangePresidentGUI();
 						}
 						else if(selectedFunction.equals("Add Officer")) {
 							buildNewAddOfficer();
@@ -583,7 +583,8 @@ public class ClubPageGUI extends JFrame {
 					buildWarningGUI("Error, user not in club. Maybe you should invite them?", "Error");
 				}
 				else if(newOfficer.findPosition(c1).equals("Member")) {
-					c1.addOfficer(u1);
+					c1.addOfficer(newOfficer);
+					frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 				}
 				
 				else {
@@ -591,6 +592,62 @@ public class ClubPageGUI extends JFrame {
 				}
 				
 				
+			}	
+		);
+	}
+	
+	private void buildChangePresidentGUI() {
+		JFrame frame = new JFrame("Change President");
+		frame.setSize(400, 200);
+		JPanel panel = new JPanel(new GridBagLayout());
+		
+		JLabel newNameLabel = new JLabel("Member Name: ");
+		JTextField newNameField = new JTextField(10);
+		
+		// les buttons
+		JButton edit = new JButton("Edit");
+		JButton cancelButton = new JButton("Cancel");
+		
+        frame.setLocationRelativeTo(null);
+        GridBagConstraints labelGBC = new GridBagConstraints();
+        labelGBC.insets = new Insets(3, 3, 3, 3);
+        GridBagConstraints fieldGBC = new GridBagConstraints();
+        fieldGBC.insets = new Insets(3, 3, 3, 3);
+        fieldGBC.gridwidth = GridBagConstraints.REMAINDER;
+        
+        panel.add(newNameLabel, labelGBC);
+        panel.add(newNameField, fieldGBC);
+        
+        panel.add(edit);
+		panel.add(cancelButton);
+		
+		frame.add(panel, BorderLayout.NORTH);
+		
+		frame.setVisible(true);
+		
+		// cancel button closes window
+		cancelButton.addActionListener(e -> {
+				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+			}	
+		);
+		
+		// cancel button closes window
+		edit.addActionListener(e -> {
+			String newOfficerName = newNameField.getText();
+			User newOfficer = app1.getUser(newOfficerName);
+			
+			if(newOfficer == c1.getPresident()) {
+				buildWarningGUI("But you're already president dufus!!", "Error");
+			}
+			else if(c1.searchMember(newOfficerName) == null) {
+				buildWarningGUI("Error, user not in club. Maybe you should invite them?", "Error");
+			}
+			else {
+				c1.changePresident(newOfficer);
+				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+			}
+			
+			
 			}	
 		);
 	}

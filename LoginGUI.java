@@ -56,7 +56,7 @@ public class LoginGUI extends JFrame {
 		this.add(Label);
 		
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		buildGUI();	
 		setVisible(true);
 	}

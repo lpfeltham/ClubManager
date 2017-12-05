@@ -76,6 +76,8 @@ public class ClubGUIDriver {
 		
 		c1.setPresident(u1);
 		
+		u3.addClub(c1);
+		
 		Place p1 = new Place();
 		p1.setAddress("ECE Room 105");
 		

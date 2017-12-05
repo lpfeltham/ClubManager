@@ -10,6 +10,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -45,7 +46,7 @@ public class SearchClubs extends JFrame{
 		GridLayout Layout = new GridLayout(0,1);
 		this.setLayout(Layout);
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		buildGUI();	
 		setVisible(true);
 	}
@@ -109,6 +110,7 @@ public class SearchClubs extends JFrame{
 			
 			}
 		});
+        
 		
 	}
 }

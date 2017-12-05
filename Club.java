@@ -145,13 +145,13 @@ public class Club {
 		return officers;
 	}
 	public void addOfficer(User user) {
-		if(user.findPosition(this)!= "Officer") {
+		if(!(officers.contains(user))) {
 			user.getClub(name).setPosition("Officer");
 			officers.add(user);
 		}
 	}
 	public void removeOfficer(User user) {
-		if(user.findPosition(this)!= "President") {
+		if(president != user) {
 			user.getClub(name).setPosition("Member");
 			officers.remove(user);
 		}
@@ -168,6 +168,7 @@ public class Club {
 	}
 	public void setPresident(User president) {	
 			president.getClub(name).setPosition("President");
+			this.president = president;
 	}
 	public void changePresident(User president) {
 		this.president.getClub(name).setPosition("Member");
@@ -191,20 +192,20 @@ public class Club {
 	}
 	public String printUsersScroller() {
 		String final_str = "";
-		final_str = final_str + "Members/n";
+		final_str = final_str + "Members\n";
 		
 		for(int i = 0; i < members.size(); i++) {
 			//if(members.get(i))
-			final_str = final_str + members.get(i).getName() + "/n";
+			final_str = final_str + members.get(i).getName() + "\n";
 		}
 		
-		final_str = final_str + "/n/nOfficers/n";
+		final_str = final_str + "\n\nOfficers\n";
 		
 		for(int i = 0; i < officers.size(); i++) {
-			final_str = final_str + officers.get(i).getName() + "/n";
+			final_str = final_str + officers.get(i).getName() + "\n";
 		}
 		
-		final_str = final_str + "/n/nPresident/n";
+		final_str = final_str + "\n\nPresident\n";
 		
 		final_str = final_str + president.getName();
 		
