@@ -135,9 +135,10 @@ public class User {
 	
 	public void updateUserPosition(String newPosition, Club aClub) {
 		for(int i = 0; i < management.size(); i++) {
-			if(management.get(i).getClub() == aClub) {
-				management.get(i).setPosition(newPosition);
+			switch(this.findPosition(aClub)) {
+			case "Officer": aClub.removeOfficer(this); break;
 			}
+
 		}
 	}
 

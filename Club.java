@@ -148,6 +148,11 @@ public class Club {
 		user.getClub(name).setPosition("Officer");
 		officers.add(user);
 	}
+	public void removeOfficer(User user) {
+		user.getClub(name).setPosition("Member");
+		officers.remove(user);
+	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -157,10 +162,8 @@ public class Club {
 	public User getPresident() {
 		return president;
 	}
-	public void setPresident(User president) {
-		if(president.getClub(name) != null) {	
+	public void setPresident(User president) {	
 			president.getClub(name).setPosition("President");
-		}
 	}
 	public void changePresident(User president) {
 		this.president.getClub(name).setPosition("Member");
