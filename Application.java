@@ -97,6 +97,16 @@ public class Application {
 		return false;
 	}
 	
+	public boolean doesClubExist(String p1) {
+		for(int i = 0; i < clubs.size(); i++) {
+			if(clubs.get(i).getName().equals(p1)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	public Place getPlace(String p1) {
 		Place aPlace = new Place();
 		for(int i = 0; i < places.size(); i++) {

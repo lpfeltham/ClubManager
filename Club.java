@@ -25,7 +25,7 @@ public class Club {
 		description = "";
 		members = new ArrayList<User>();
 		officers = new ArrayList<User>();
-		president = new User();
+		president = null;
 		events = new ArrayList<Event>();
 		benefits = new ArrayList<String>();
 		button = new JButton();
@@ -144,6 +144,10 @@ public class Club {
 	public ArrayList<User> getOfficers() {
 		return officers;
 	}
+	public void addOfficer(User user) {
+		user.getClub(name).setPosition("Officer");
+		officers.add(user);
+	}
 	public String getDescription() {
 		return description;
 	}
@@ -154,12 +158,8 @@ public class Club {
 		return president;
 	}
 	public void setPresident(User president) {
-		this.president = president;
-		if(president != null) {
+		if(president.getClub(name) != null) {	
 			president.getClub(name).setPosition("President");
-		}
-		else {
-			//president.getClub(name).setPosition("President");
 		}
 	}
 	public void changePresident(User president) {

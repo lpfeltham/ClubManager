@@ -615,3 +615,4 @@ public class ClubPageGUI extends JFrame {
 	}
 	
 }
+
