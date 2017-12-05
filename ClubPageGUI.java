@@ -1,6 +1,7 @@
 package ClubManagement;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -17,6 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class ClubPageGUI extends JFrame {
@@ -188,6 +191,7 @@ public class ClubPageGUI extends JFrame {
 				optionsList.addElement("Add Event");
 				optionsList.addElement("Add Officer");
 				optionsList.addElement("Change President");
+				optionsList.addElement("Print All Users");
 				
 				JList<String> optionString = new JList<>(optionsList);
 				JList<String> eventString = new JList<>(eventList);
@@ -238,6 +242,9 @@ public class ClubPageGUI extends JFrame {
 						}
 						else if(selectedFunction.equals("Add Officer")) {
 							buildNewAddOfficer();
+						}
+						else if(selectedFunction.equals("Print All Users")) {
+							buildNewPrintPane();
 						}
 						else {
 							// Generate edit event name
@@ -572,9 +579,11 @@ public class ClubPageGUI extends JFrame {
 				if(newOfficer == null) {
 					buildWarningGUI("Error, user doesn't exist", "Error");
 				}
-				
-				if(newOfficer.findPosition(c1).equals("Member")) {
-					
+				else if(c1.searchMember(newOfficerName) == null) {
+					buildWarningGUI("Error, user not in club. Maybe you should invite them?", "Error");
+				}
+				else if(newOfficer.findPosition(c1).equals("Member")) {
+					newOfficer.updateUserPosition("Officer", c1);
 				}
 				
 				else {
@@ -584,6 +593,52 @@ public class ClubPageGUI extends JFrame {
 				
 			}	
 		);
+	}
+	
+	private void buildNewPrintPane() {
+		JFrame frame = new JFrame("User Info");
+
+		// panel.add(...);
+		String str = c1.printUsersScroller();
+		JTextArea textSpace = new JTextArea(50, 150);
+		textSpace.setText(str);
+		
+		JScrollPane scrollPane = new JScrollPane(textSpace);
+		
+		frame.getContentPane().setLayout(new BorderLayout());
+		// only a configuration to the jScrollPane...
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		frame.setSize(500, 500);
+		
+		
+		JButton okButton = new JButton("Ok");
+		scrollPane.add(okButton);
+		okButton.setVisible(true);
+		scrollPane.setVisible(true);
+		
+		JPanel panel = new JPanel(); //Flow layout by default
+		//If you want to anchor the buttons to the right you might try
+		panel.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		
+		panel.add(okButton);
+		panel.setVisible(true);
+		
+		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+		frame.getContentPane().add(panel, BorderLayout.SOUTH);
+		// Then, add the jScrollPane to your frame
+		frame.add(scrollPane);
+		frame.setVisible(true);
+		
+		//handleAdminPrint();
+		
+		okButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) {
+				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+			}	
+		});
 	}
 	
 	private void buildWarningGUI(String printText, String titleText) {
