@@ -23,6 +23,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -114,12 +115,14 @@ public class LoginGUI extends JFrame {
         
 			JButton logout = new JButton("logout");
 			JButton viewClub = new JButton("View Club Page");
+			JButton createClub = new JButton("Create a Club");
 			JButton joinClubs = new JButton("Join a Club");
 			
 			logout.setBackground(Color.RED);
         
 			this.add(viewClub);
         	this.add(joinClubs);
+        	this.add(createClub);
         	this.add(logout);
         
         	logout.addActionListener(new ActionListener() {	
@@ -142,6 +145,15 @@ public class LoginGUI extends JFrame {
         	joinClubs.addActionListener(new ActionListener(){	
         		public void actionPerformed(ActionEvent e) {
         			SearchClubs newGUI = new SearchClubs("Search", app1, u1);	
+        		}
+			});
+        	createClub.addActionListener(new ActionListener(){	
+        		public void actionPerformed(ActionEvent e) {
+        			CreateClubGUI newGUI = new CreateClubGUI(u1, app1);	
+        			//SwingUtilities.updateComponentTreeUI(this);
+        			invalidate();
+        			revalidate();
+        			repaint();
         		}
 			});
 		}
