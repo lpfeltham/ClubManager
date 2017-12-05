@@ -484,7 +484,40 @@ public class ClubPageGUI extends JFrame {
 		
 		// cancel button closes window
 		edit.addActionListener(e -> {
+			double newStart = Double.parseDouble(newStartHour.getText());
+			double newEnd = Double.parseDouble(newEndHour.getText());
+			String date = newDate.getText();
+			
+			Schedule s1 = new Schedule();
+			s1.setStartHour(newStart);
+			s1.setEndHour(newEnd);
+			s1.setDate(date);
+			
+			String aName = newName.getText();
+			String aPlace = newPlace.getText();
+			
+			Event e6 = new Event();
+			e6.setName(aName);
+			e6.setSchedule(s1);
+			
+			if(app1.doesPlaceExist(aPlace) == false) {
+				buildWarningGUI("Error " + aPlace +
+						" does not exist.", "Error");
+			}
+			else {
+				Place p1 = app1.getPlace(aPlace);
 				
+				if(p1.detectScheduleConflict(s1) == true) {
+					buildWarningGUI("Error schedule conflict", "Error");
+				}
+				else {
+					//p1.cancelSchedule(e1.getSchedule());
+					e6.setPlace(p1);
+					c1.addEvent(e6);
+					frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+				}
+			}
+			
 			}	
 		);
 	}

@@ -107,7 +107,15 @@ public class Club {
 	}
 	
 	public void addEvent(Event e1) {
-		this.events.add(e1);
+		Event e2 = new Event();
+		
+		e2.setName(e1.getName());
+		e2.setSchedule(e1.getSchedule());
+		e2.setPlace(e1.getPlace());
+		e2.setDressCode(e1.getDressCode());
+		e2.setDescription(e1.getDescription());
+		
+		this.events.add(e2);
 	}
 	
 	public boolean removeEvent(String name) {
