@@ -69,6 +69,11 @@ public class ClubGUIDriver {
 		u1.addClub(c1);
 		u1.addClub(c3);
 		
+		u2.addClub(c1);
+		u3.addClub(c1);
+		
+		u2.updateUserPosition("Officer", c1);
+		
 		u1.updateUserPosition("President", c1);
 		
 		Place p1 = new Place();

@@ -183,6 +183,26 @@ public class Club {
 			System.out.println("already a member");
 		}
 	}
-	
+	public String printUsersScroller() {
+		String final_str = "";
+		final_str = final_str + "Members/n";
+		
+		for(int i = 0; i < members.size(); i++) {
+			//if(members.get(i))
+			final_str = final_str + members.get(i).getName() + "/n";
+		}
+		
+		final_str = final_str + "/n/nOfficers/n";
+		
+		for(int i = 0; i < officers.size(); i++) {
+			final_str = final_str + officers.get(i).getName() + "/n";
+		}
+		
+		final_str = final_str + "/n/nPresident/n";
+		
+		final_str = final_str + president.getName();
+		
+		return final_str;
+	}
 	
 }
