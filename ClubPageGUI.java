@@ -186,6 +186,8 @@ public class ClubPageGUI extends JFrame {
 				optionsList.addElement("Edit Event Name");
 				optionsList.addElement("Remove Event");
 				optionsList.addElement("Add Event");
+				optionsList.addElement("Add Officer");
+				optionsList.addElement("Change President");
 				
 				JList<String> optionString = new JList<>(optionsList);
 				JList<String> eventString = new JList<>(eventList);
@@ -230,6 +232,12 @@ public class ClubPageGUI extends JFrame {
 						}
 						else if(selectedFunction.equals("Add Event")) {
 							buildNewEventGUI();
+						}
+						else if(selectedFunction.equals("Change President")) {
+							
+						}
+						else if(selectedFunction.equals("Add Officer")) {
+							buildNewAddOfficer();
 						}
 						else {
 							// Generate edit event name
@@ -518,6 +526,62 @@ public class ClubPageGUI extends JFrame {
 				}
 			}
 			
+			}	
+		);
+	}
+	
+	private void buildNewAddOfficer() {
+		JFrame frame = new JFrame("Add New Officer");
+		frame.setSize(400, 200);
+		JPanel panel = new JPanel(new GridBagLayout());
+		
+		JLabel newNameLabel = new JLabel("Member Name: ");
+		JTextField newNameField = new JTextField(10);
+		
+		// les buttons
+		JButton edit = new JButton("Edit");
+		JButton cancelButton = new JButton("Cancel");
+		
+        frame.setLocationRelativeTo(null);
+        GridBagConstraints labelGBC = new GridBagConstraints();
+        labelGBC.insets = new Insets(3, 3, 3, 3);
+        GridBagConstraints fieldGBC = new GridBagConstraints();
+        fieldGBC.insets = new Insets(3, 3, 3, 3);
+        fieldGBC.gridwidth = GridBagConstraints.REMAINDER;
+        
+        panel.add(newNameLabel, labelGBC);
+        panel.add(newNameField, fieldGBC);
+        
+        panel.add(edit);
+		panel.add(cancelButton);
+		
+		frame.add(panel, BorderLayout.NORTH);
+		
+		frame.setVisible(true);
+		
+		// cancel button closes window
+		cancelButton.addActionListener(e -> {
+				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+			}	
+		);
+		
+		// cancel button closes window
+		edit.addActionListener(e -> {
+				String newOfficerName = newNameField.getText();
+				User newOfficer = app1.getUser(newOfficerName);
+				if(newOfficer == null) {
+					buildWarningGUI("Error, user doesn't exist", "Error");
+				}
+				
+				if(newOfficer.findPosition(c1).equals("Member")) {
+					
+				}
+				
+				else {
+					buildWarningGUI("Error, user already officer or president", "Error");
+				}
+				
+				
 			}	
 		);
 	}
