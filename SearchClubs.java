@@ -1,6 +1,7 @@
 package ClubManagement;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -19,6 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
@@ -81,11 +83,11 @@ public class SearchClubs extends JFrame{
 		
         JList<String> list = new JList<>(clubList);  
         //list.setBounds(100,0, 75,75);  
-        this.add(list);
+        this.add(new JScrollPane(list));
         
         JButton logout = new JButton("logout");
-        JButton viewClub = new JButton("View Club Page");
-        
+        JButton viewClub = new JButton("Join Club");
+        logout.setBackground(Color.RED);
         
         this.add(viewClub);
         this.add(logout);
@@ -94,19 +96,20 @@ public class SearchClubs extends JFrame{
 		{	
 			public void actionPerformed(ActionEvent e) {
 				ClubGUI newGUI = new ClubGUI("ClubGUI", app1);	
-    			dispose();
+				System.exit(0);
 			}
 		});
         
         viewClub.addActionListener(new ActionListener()
 		{	
 			public void actionPerformed(ActionEvent e) {
-				//u1 = null;
-				// maybe set the user to null in all GUI's FIXME
-				//System.exit(0);
-				
-	        	
-			
+				String selected = list.getSelectedValue();
+				for(int i = 0; i < app1.getClubs().size(); i++) {
+					if(app1.getClubs().get(i).getName().equals(selected)) {
+						u1.addClub(app1.getClubs().get(i));
+					}
+				}
+				dispose();
 			}
 		});
         

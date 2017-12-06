@@ -50,18 +50,21 @@ public class InitialGUI extends JFrame{
 			JButton logout = new JButton("logout");
 			JButton joinClubs = new JButton("Join a Club");
 			JButton viewClubs = new JButton("View Clubs");
+			JButton createClub = new JButton("Create a Club");
 			
+			createClub.setBackground(Color.GREEN);
 			logout.setBackground(Color.RED);
 			joinClubs.setBackground(Color.GREEN);
 			
 			this.add(joinClubs);
+			this.add(createClub);
 			this.add(viewClubs);
 			this.add(logout);
 			
 			logout.addActionListener(new ActionListener() {	
         		public void actionPerformed(ActionEvent e) {
         			ClubGUI newGUI = new ClubGUI("ClubGUI", app1);	
-        			dispose();
+        			System.exit(0);
         		}
         	});
 			joinClubs.addActionListener(new ActionListener(){	
@@ -74,7 +77,15 @@ public class InitialGUI extends JFrame{
         			LoginGUI newGUI = new LoginGUI("Welcome " + u1.getName(), app1, u1);	
         		}
 			});
-			
+			createClub.addActionListener(new ActionListener(){	
+        		public void actionPerformed(ActionEvent e) {
+        			CreateClubGUI newGUI = new CreateClubGUI(u1, app1);	
+        			//SwingUtilities.updateComponentTreeUI(this);
+        			invalidate();
+        			revalidate();
+        			repaint();
+        		}
+			});
 		}
 }
 

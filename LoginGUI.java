@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
@@ -111,24 +112,20 @@ public class LoginGUI extends JFrame {
 		
 			JList<String> list = new JList<>(clubList);  
 			list.setBounds(100,100, 75,75);  
-			this.add(list);
+			this.add(new JScrollPane(list));
         
 			JButton logout = new JButton("logout");
 			JButton viewClub = new JButton("View Club Page");
-			JButton createClub = new JButton("Create a Club");
-			JButton joinClubs = new JButton("Join a Club");
 			
 			logout.setBackground(Color.RED);
         
 			this.add(viewClub);
-        	this.add(joinClubs);
-        	this.add(createClub);
         	this.add(logout);
         
         	logout.addActionListener(new ActionListener() {	
         		public void actionPerformed(ActionEvent e) {
         			ClubGUI newGUI = new ClubGUI("ClubGUI", app1);	
-        			dispose();
+        			System.exit(0);
         		}
         	});
         
@@ -136,24 +133,9 @@ public class LoginGUI extends JFrame {
         		public void actionPerformed(ActionEvent e) {
         			String selected = list.getSelectedValue();
 					ClubPageGUI newGUI = new ClubPageGUI(u1.getClub(selected).getClub(), u1, app1);
-				
         		}
         	});
         
-        	joinClubs.addActionListener(new ActionListener(){	
-        		public void actionPerformed(ActionEvent e) {
-        			SearchClubs newGUI = new SearchClubs("Search", app1, u1);	
-        		}
-			});
-        	createClub.addActionListener(new ActionListener(){	
-        		public void actionPerformed(ActionEvent e) {
-        			CreateClubGUI newGUI = new CreateClubGUI(u1, app1);	
-        			//SwingUtilities.updateComponentTreeUI(this);
-        			invalidate();
-        			revalidate();
-        			repaint();
-        		}
-			});
 		}
 		
 	}

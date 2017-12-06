@@ -301,7 +301,7 @@ public class ClubPageGUI extends JFrame {
 		JTextField newNameField = new JTextField(10);
 		
 		// les buttons
-		JButton edit = new JButton("Edit");
+		JButton edit = new JButton("OK");
 		JButton cancelButton = new JButton("Cancel");
 		
         frame.setLocationRelativeTo(null);
@@ -347,7 +347,7 @@ public class ClubPageGUI extends JFrame {
 		JTextField newNameField = new JTextField(10);
 		
 		// les buttons
-		JButton edit = new JButton("Edit");
+		JButton edit = new JButton("OK");
 		JButton cancelButton = new JButton("Cancel");
 		
         frame.setLocationRelativeTo(null);
@@ -414,7 +414,7 @@ public class ClubPageGUI extends JFrame {
 		JTextField newDate = new JTextField(10);
 		
 		// les buttons
-		JButton edit = new JButton("Edit");
+		JButton edit = new JButton("OK");
 		JButton cancelButton = new JButton("Cancel");
 		
         frame.setLocationRelativeTo(null);
@@ -578,7 +578,7 @@ public class ClubPageGUI extends JFrame {
 		JTextField newNameField = new JTextField(10);
 		
 		// les buttons
-		JButton edit = new JButton("Edit");
+		JButton edit = new JButton("OK");
 		JButton cancelButton = new JButton("Cancel");
 		
         frame.setLocationRelativeTo(null);
@@ -637,7 +637,7 @@ public class ClubPageGUI extends JFrame {
 		JTextField newNameField = new JTextField(10);
 		
 		// les buttons
-		JButton edit = new JButton("Edit");
+		JButton edit = new JButton("OK");
 		JButton cancelButton = new JButton("Cancel");
 		
         frame.setLocationRelativeTo(null);
@@ -703,7 +703,7 @@ public class ClubPageGUI extends JFrame {
 		frame.setSize(500, 500);
 		
 		
-		JButton okButton = new JButton("Ok");
+		JButton okButton = new JButton("OK");
 		scrollPane.add(okButton);
 		okButton.setVisible(true);
 		scrollPane.setVisible(true);
